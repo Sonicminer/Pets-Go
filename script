@@ -48,6 +48,8 @@ local Toggle = WinterTab:CreateToggle({
    end,
 })
 
+local Section = Tab:CreateSection("Fishing")
+
 local Toggle = WinterTab:CreateToggle({
    Name = "Auto Buy Winter Merchant",
    CurrentValue = false,
