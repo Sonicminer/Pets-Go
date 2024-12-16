@@ -1,1 +1,74 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local Window = Rayfield:CreateWindow({
+   Name = "JLT Studios | Pets GO!",
+   LoadingTitle = "JLT Studios",
+   LoadingSubtitle = "by JLT Studios",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local WinterTab = Window:CreateTab("❄ Winter Event", nil) -- Title, Image
+
+local Toggle = WinterTab:CreateToggle({
+   Name = "Auto Buy Winter Upgrades",
+   CurrentValue = false,
+   Flag = "autobuywinter", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoBuyWinter = (Value);
+   end,
+})
+
+local Toggle = WinterTab:CreateToggle({
+   Name = "Auto Buy Winter Merchant",
+   CurrentValue = false,
+   Flag = "automerchantwinter", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoMerchantWinter = (Value);
+   end,
+})
+
+
+while wait() do
+    if getgenv().autoBuyWinter == true then
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Holiday Event")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Ice Fishing")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Rod Hunter I")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Rod Hunter II")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Fisher I")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Ice Fishing Merchant")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Ice Merchant Restocking I")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Ice Merchant Restocking II")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Treasure Chests I")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Caster I")
+        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer("Frozen Fisher I")
+        wait()
+    end
+    if getgenv().autoMerchantWinter == true then
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",1)
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",2)
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",3)
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",4)
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",5)
+        game:GetService("ReplicatedStorage").Network.CustomMerchants_Purchase:InvokeServer("IceFishingMerchant",6)
+        wait()
+    end
+end
